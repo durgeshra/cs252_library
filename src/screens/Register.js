@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Login from './LogIn';
 import {
     ScrollView,
     Text,
@@ -46,7 +47,7 @@ class Register extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.24.240.154:5000/api/users/register", {
+        fetch("http://172.23.150.20:5000/api/users/register", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -55,15 +56,17 @@ class Register extends Component {
             })
             .then((response) => response.json())
             .then((response) => {
-                if (response.success==true) 
+
+                if (response._id) 
                 {    proceed = true;
+                    this.backToLogin();
                     console.log("SUCCESS");
                 } 
                 else this.setState({ message: response.message });
             })
             .then(() => {
+                
                 this.setState({ isLoggingIn: false })
-                if (proceed) this.props.onRegisterPress();
             })
             .catch(err => {
 				this.setState({ message: err.message });
@@ -90,7 +93,10 @@ class Register extends Component {
         this._password2.setNativeProps({ text: '' });
         this.setState({ message: '' });
     }
-
+    backToLogin = () => {
+        console.log(this.props);
+        this.props.navigation.navigate('Login');
+    }
     render() {
         return (
             <ScrollView style={{padding: 20}}>
@@ -102,7 +108,7 @@ class Register extends Component {
 				<TextInput
 					ref={component => this._name = component}
 					placeholder='Name' 
-					onChangeText={(email) => this.setState({name})}
+					onChangeText={(name) => this.setState({name})}
 					autoFocus={true}
 					onFocus={this.clearName}
 				/>

@@ -45,7 +45,7 @@ class Login extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.24.240.154:5000/api/users/login", {
+        fetch("http://172.23.150.20:5000/api/users/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -63,12 +63,11 @@ class Login extends Component {
             })
             .then(() => {
                 this.setState({ isLoggingIn: false })
-                if (proceed) this.props.onLoginPress();
+                if(proceed) this.goToSecured();
             })
             .catch(err => {
 				this.setState({ message: err.message });
 				this.setState({ isLoggingIn: false });
-                this.props.onRegisterPress();
 			});
     }
 
@@ -83,8 +82,12 @@ class Login extends Component {
     }
 
     onPressRegister = () => {
-        console.log(props);
+        console.log(this.props);
         this.props.navigation.navigate('Register');
+    }
+    goToSecured = () => {
+        console.log(this.props);
+        this.props.navigation.navigate('Secured');
     }
 
     render() {
@@ -137,7 +140,5 @@ class Login extends Component {
         )
     }
 }
-
-AppRegistry.registerComponent('LogIn', () => Login);
 
 export default Login;

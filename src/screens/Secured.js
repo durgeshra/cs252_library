@@ -8,6 +8,11 @@ import {
 } from 'react-native';
 
 class Secured extends Component {
+
+	onLogoutPress = () => {
+        console.log(this.props);
+        this.props.navigation.navigate('Login');
+    }
 	render() {
 		return (
 			<ScrollView style={{padding: 20}}>
@@ -17,7 +22,7 @@ class Secured extends Component {
 				</Text>
 				<View style={{margin:20}} />
 				<Button
-		            onPress={this.props.onLogoutPress}
+		            onPress={this.onLogoutPress}
 		            title="Logout"
 		        />
 		    </ScrollView>

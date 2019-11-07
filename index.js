@@ -13,7 +13,7 @@ import Secured from './src/screens/Secured';
 const MainNavigator = createStackNavigator({
   Login: {screen: Login},
   Register: {screen: Register},
-  Secured: {screen: Secured},
+  Secured: {screen: Secured}},
   {
   	initialRouteName: "Login"
   }
