@@ -87,7 +87,7 @@ class Login extends Component {
     }
     goToSecured = () => {
         console.log(this.props);
-        this.props.navigation.navigate('Secured');
+        this.props.navigation.navigate('Movies');
     }
 
     render() {

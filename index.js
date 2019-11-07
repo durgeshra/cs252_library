@@ -8,12 +8,16 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Login from './src/screens/LogIn';
 import Register from './src/screens/Register';
 import Secured from './src/screens/Secured';
-
+import Confirmation from './src/Confirmation';
+import Movies from './src/Movies';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: Login},
   Register: {screen: Register},
-  Secured: {screen: Secured}},
+  Secured: {screen: Secured},
+    Confirmation: {screen: Confirmation},
+    Movies: {screen: Movies},
+  },
   {
   	initialRouteName: "Login"
   }
