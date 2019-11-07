@@ -7,23 +7,18 @@ import {
     Button,
     Alert,
     AppRegistry,
-    ActivityIndicator
+    ActivityIndicator,
+    Stylesheet,
+    TouchableOpacity
 } from 'react-native';
 
+import { StackNavigator } from "react-navigation";
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 // import Environment from './../Environment';
+import Register from './Register';
 
 class Login extends Component {
-
-  static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton
-      handleButtonPress={() => navigation.navigate('Register')}
-      location="right"
-      color={colors.black}
-      text="Register"
-    />,
-    headerTransparent: true,
-    headerTintColor: colors.black,
-  });
 
     state = {
         email: '',
@@ -72,7 +67,8 @@ class Login extends Component {
             })
             .catch(err => {
 				this.setState({ message: err.message });
-				this.setState({ isLoggingIn: false })
+				this.setState({ isLoggingIn: false });
+                this.props.onRegisterPress();
 			});
     }
 
@@ -86,8 +82,17 @@ class Login extends Component {
         this.setState({ message: '' });
     }
 
+    onPressRegister = () => {
+        console.log(props);
+        this.props.navigation.navigate('Register');
+    }
+
     render() {
+        
         return (
+
+
+
             <ScrollView style={{padding: 20}}>
 				<Text 
 					style={{fontSize: 27}}>
@@ -122,6 +127,12 @@ class Login extends Component {
 		      		onPress={this._userLogin}
 		      		title="Submit"
 		      	/>
+
+                <Button
+                    title="Register"
+                    onPress={this.onPressRegister}
+                  />
+
 	      </ScrollView>
         )
     }

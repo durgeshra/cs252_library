@@ -10,23 +10,16 @@ import {
     ActivityIndicator
 } from 'react-native';
 
+import { StackNavigator } from "react-navigation";
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 // import Environment from './../Environment';
 
 class Register extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
-    headerRight: <NavBarButton
-      handleButtonPress={() => navigation.navigate('LogIn')}
-      location="right"
-      color={colors.black}
-      text="Login"
-    />,
-    headerTransparent: true,
-    headerTintColor: colors.black,
-  });
 
     state = {
-    	name: ''
+    	name: '',
         email: '',
         password: '',
         password2: false,

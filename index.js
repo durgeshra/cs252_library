@@ -3,28 +3,24 @@ import {
   AppRegistry
 } from 'react-native';
 
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import Login from './src/screens/LogIn';
+import Register from './src/screens/Register';
 import Secured from './src/screens/Secured';
-import App from './App'
 
-class StormpathReactNative extends Component {
-  
-  state = {
-    isLoggedIn: false
+
+const MainNavigator = createStackNavigator({
+  Login: {screen: Login},
+  Register: {screen: Register},
+  Secured: {screen: Secured},
+  {
+  	initialRouteName: "Login"
   }
+);
 
-  render() {
+const App = createAppContainer(MainNavigator);
 
-    if (this.state.isLoggedIn) 
-      return <Secured 
-          onLogoutPress={() => this.setState({isLoggedIn: false})}
-        />;
-    else 
-      return <Login 
-          onLoginPress={() => this.setState({isLoggedIn: true})}
-        />;
-  }
+export default App;
  
-}
- 
-AppRegistry.registerComponent('awesome', () => StormpathReactNative);
+AppRegistry.registerComponent('awesome', () => App);
