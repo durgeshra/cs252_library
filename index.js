@@ -10,11 +10,13 @@ import Register from './src/screens/Register';
 import Secured from './src/screens/Secured';
 import Confirmation from './src/Confirmation';
 import Movies from './src/Movies';
+import Upload from './src/Upload';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: Login},
   Register: {screen: Register},
   Secured: {screen: Secured},
+  Upload: {screen: Upload},
     Confirmation: {screen: Confirmation},
     Movies: {screen: Movies},
   },

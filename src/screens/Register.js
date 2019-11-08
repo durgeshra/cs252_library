@@ -7,10 +7,11 @@ import {
     View,
     Button,
     Alert,
+    Image,
     AppRegistry,
     ActivityIndicator
 } from 'react-native';
-
+import ImagePicker from 'react-native-image-picker';
 import { StackNavigator } from "react-navigation";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -24,6 +25,7 @@ class Register extends Component {
         email: '',
         password: '',
         password2: false,
+        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIMErF3PUdWe6IUczNaKKUUXTunMcQpRXIyjonSUPYpoJu2fKWJQ&w=65&h=65',
         message: ''
     }
 
@@ -35,7 +37,8 @@ class Register extends Component {
         	name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
+            password2: this.state.password2,
+            photo: this.state.photo
         };
 
         var formBody = [];
@@ -74,6 +77,19 @@ class Register extends Component {
 			});
     }
 
+
+    handleChoosePhoto = () => {
+        const options = {
+          noData: true,
+        };
+        ImagePicker.launchImageLibrary(options, response => {
+          if (response.uri) {
+            this.setState({ photo: response.uri });
+            console.log(response.uri);
+          }
+        });
+      };
+
     clearName = () => {
         this._name.setNativeProps({ text: '' });
         this.setState({ message: '' });
@@ -98,6 +114,8 @@ class Register extends Component {
         this.props.navigation.navigate('Login');
     }
     render() {
+        const photo = this.state.photo;
+        console.log(photo);
         return (
             <ScrollView style={{padding: 20}}>
 				<Text 
@@ -133,6 +151,15 @@ class Register extends Component {
 					secureTextEntry={true}
 					onFocus={this.clearPassword2}
 				/>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    {photo && (
+                    <Image
+                        source={{ uri: photo }}
+                        style={{ width: 150, height: 150 }}
+                    />
+                    )}
+                    <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
+                </View>
 				{!!this.state.message && (
 					<Text
 						style={{fontSize: 14, color: 'red', padding: 5}}>

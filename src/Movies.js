@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   ScrollView,
   StyleSheet,
-  View
+  View,
+  Text,
+  Button
 } from 'react-native';
 import { movies } from './data';
 import MoviePoster from './MoviePoster';
@@ -11,6 +13,7 @@ import { StackNavigator } from "react-navigation";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Confirmation from './Confirmation';
+import Upload from './Upload';
 
 export default class Movies extends Component {
     state = {
@@ -67,11 +70,43 @@ export default class Movies extends Component {
         //   <Confirmation code={Math.random().toString(36).substring(6).toUpperCase()} />;
         }
       }
+      onLogoutPress = () => {
+        this.props.navigation.navigate('Login');
+    }
 
+    onUploadPress = () => {
+      this.props.navigation.navigate('Upload');
+  }
   render() {
+
+
+
     return (
+
+
+
       <View style={styles.container}>
+        			<ScrollView style={{padding: 10}}>
+				<Text 
+					style={{fontSize: 27}}>
+					Welcome
+				</Text>
+				<View style={{margin:0}} />
+				<Button
+		            onPress={this.onLogoutPress}
+		            title="Logout"
+		        />
+        <Button
+		            onPress={this.onUploadPress}
+		            title="View or Upload Image"
+		        />
+		    </ScrollView>
         <ScrollView
+
+      
+
+  
+
           contentContainerStyle={styles.scrollContent}
 		  // Hide all scroll indicators
           showsHorizontalScrollIndicator={false}
