@@ -20,20 +20,16 @@ const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
 const defaultHeight = height * 0.67;
 
-export default class MoviePopup extends Component {
+export default class BookPopup extends Component {
 
   static propTypes = {
 	isOpen: PropTypes.bool.isRequired,
-    // Movie object that has title, genre, poster, days and times
-    movie: PropTypes.object,
+    // Book object that has title, genre, poster, days
+    book: PropTypes.object,
     // Index of chosen day
     chosenDay: PropTypes.number,
-    // Index of chosem show time
-    chosenTime: PropTypes.number,
     // Gets called when user chooses day
     onChooseDay: PropTypes.func,
-    // Gets called when user chooses time
-    onChooseTime: PropTypes.func,
     // Gets called when user books their ticket
     onBook: PropTypes.func,
     // Gets called when popup closed
@@ -191,13 +187,13 @@ export default class MoviePopup extends Component {
         maxWidth: 110,            // limit width
         marginRight: 10,
       },
-      movieContainer: this.state.expanded ? {
-        flexDirection: 'column',  // arrange image and movie info in a column
+      bookContainer: this.state.expanded ? {
+        flexDirection: 'column',  // arrange image and book info in a column
         alignItems: 'center',     // and center them
       } : {
-        flexDirection: 'row',     // arrange image and movie info in a row
+        flexDirection: 'row',     // arrange image and book info in a row
       },
-      movieInfo: this.state.expanded ? {
+      bookInfo: this.state.expanded ? {
         flex: 0,
         alignItems: 'center',     // center horizontally
         paddingTop: 20,
@@ -213,15 +209,15 @@ export default class MoviePopup extends Component {
 
   render() {
     const {
-      movie,
+      book,
       chosenDay,
       chosenTime,
       onChooseDay,
       onChooseTime,
       onBook
     } = this.props;
-    // Pull out movie data
-    const { title, genre, poster, days, times } = movie || {};
+    // Pull out book data
+    const { title, genre, poster, days } = book || {};
     // Render nothing if not visible
     if (!this.state.visible) {
       return null;
@@ -243,9 +239,9 @@ export default class MoviePopup extends Component {
 
           {/* Content */}
           <View style={styles.content}>
-            {/* Movie poster, title and genre */}
+            {/* Book poster, title and genre */}
             <View
-              style={[styles.movieContainer, this.getStyles().movieContainer]}
+              style={[styles.bookContainer, this.getStyles().bookContainer]}
               {...this._panResponder.panHandlers}
             >
               {/* Poster */}
@@ -253,13 +249,13 @@ export default class MoviePopup extends Component {
                 <Image source={{ uri: poster }} style={styles.image} />
               </View>
               {/* Title and genre */}
-              <View style={[styles.movieInfo, this.getStyles().movieInfo]}>
+              <View style={[styles.bookInfo, this.getStyles().bookInfo]}>
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
                 <Text style={styles.genre}>{genre}</Text>
               </View>
             </View>
 
-            {/* Showtimes */}
+            {/* Data */}
             <View>
               {/* Day */}
               <Text style={styles.sectionHeader}>Day</Text>
@@ -267,13 +263,6 @@ export default class MoviePopup extends Component {
                 values={days}
                 chosen={chosenDay}
                 onChoose={onChooseDay}
-                />
-              {/* Time */}
-              <Text style={styles.sectionHeader}>Showtime</Text>
-              <Options
-                values={times}
-                chosen={chosenTime}
-                onChoose={onChooseTime}
                 />
             </View>
 
@@ -286,7 +275,7 @@ export default class MoviePopup extends Component {
               style={styles.buttonContainer}
               onPress={onBook}
             >
-              <Text style={styles.button}>Book My Tickets</Text>
+              <Text style={styles.button}>Reserve My Book!</Text>
             </TouchableHighlight>
           </View>
 
@@ -318,8 +307,8 @@ const styles = StyleSheet.create({
     margin: 20,
     marginBottom: 0,
   },
-  // Movie container
-  movieContainer: {
+  // Book container
+  bookContainer: {
     flex: 1,                            // take up all available space
     marginBottom: 20,
   },
@@ -330,7 +319,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,                   // rounded corners
     ...StyleSheet.absoluteFillObject,   // fill up all space in a container
   },
-  movieInfo: {
+  bookInfo: {
     backgroundColor: 'transparent',     // looks nicier when switching to/from expanded mode
   },
   title: {

@@ -9,8 +9,9 @@ import Login from './src/screens/LogIn';
 import Register from './src/screens/Register';
 import Secured from './src/screens/Secured';
 import Confirmation from './src/Confirmation';
-import Movies from './src/Movies';
+import Books from './src/Books';
 import Upload from './src/Upload';
+import Welcome from './src/Welcome';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: Login},
@@ -18,7 +19,8 @@ const MainNavigator = createStackNavigator({
   Secured: {screen: Secured},
   Upload: {screen: Upload},
     Confirmation: {screen: Confirmation},
-    Movies: {screen: Movies},
+    Books: {screen: Books},
+    Welcome: {screen: Welcome},
   },
   {
   	initialRouteName: "Login"

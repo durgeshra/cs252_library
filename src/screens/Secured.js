@@ -8,14 +8,14 @@ import {
 	Navigator
 } from 'react-native';
 import Confirmation from '../Confirmation';
-import Movies from '../Movies';
+import Books from '../Books';
 import { StackNavigator } from "react-navigation";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 const RouteMapper = (route, navigator) => {
-	if (route.name === 'movies') {
+	if (route.name === 'books') {
 	  return (
-		<Movies navigator={navigator} />
+		<Books navigator={navigator} />
 	  );
 	} else if (route.name === 'confirmation') {
 	  return (
@@ -46,7 +46,7 @@ class Secured extends Component {
 	// }
 	render() {
 		return (
-			<Movies />
+			<Books />
 
 		);
 	  }
@@ -63,11 +63,11 @@ export default Secured;
 // import {
 //   Navigator,
 // } from 'react-native';
-// import Movies from './Movies';
+// import Books from './Books';
 
 // const RouteMapper = (route, navigator) => {
-//   if (route.name === 'movies') {
-//     return <Movies navigator={navigator} />;
+//   if (route.name === 'books') {
+//     return <Books navigator={navigator} />;
 //   }
 // };
 
@@ -75,8 +75,8 @@ export default Secured;
 //   render() {
 //     return (
 //       <Navigator
-//         // Default to movies route
-//         initialRoute={{ name: 'movies' }}
+//         // Default to books route
+//         initialRoute={{ name: 'books' }}
 //         // Use FloatFromBottom transition between screens
 //         configureScene={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottom}
 //         // Pass a route mapper functions

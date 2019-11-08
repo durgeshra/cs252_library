@@ -15,18 +15,18 @@ const { width, height } = Dimensions.get('window');
 // How many posters we want to have in each row and column
 const cols = 3, rows = 3;
 
-export default class MoviePoster extends Component {
+export default class BookPoster extends Component {
   // Component prop types
   static propTypes = {
-    // Movie object with title, genre, and poster
-    movie: PropTypes.object.isRequired,
+    // Book object with title, genre, and poster
+    book: PropTypes.object.isRequired,
     // Called when user taps on a poster
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { movie, movie: { title, genre, poster }, onOpen } = this.props;
+    const { book, book: { title, genre, poster }, onOpen } = this.props;
     return (
-      <TouchableOpacity style={styles.container} onPress={() => onOpen(movie)}>
+      <TouchableOpacity style={styles.container} onPress={() => onOpen(book)}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: poster }} style={styles.image} />
         </View>

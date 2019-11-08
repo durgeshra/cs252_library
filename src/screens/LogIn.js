@@ -4,6 +4,7 @@ import {
     Text,
     TextInput,
     View,
+    Image,
     Button,
     Alert,
     AppRegistry,
@@ -12,11 +13,13 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import ImagePicker from 'react-native-image-picker';
 import { StackNavigator } from "react-navigation";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // import Environment from './../Environment';
 import Register from './Register';
+import Welcome from '../Welcome';
 
 class Login extends Component {
 
@@ -25,6 +28,13 @@ class Login extends Component {
         password: '',
         isLoggingIn: false,
         message: ''
+    }
+    
+    constructor(){
+        super();
+        global.photoLink = '';
+        global.name = '';
+        global.logo = 'https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_tfop89pt/def_height/200/def_width/200/version/100012/type/1';
     }
 
     _userLogin = () => {
@@ -45,7 +55,7 @@ class Login extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.23.150.20:5000/api/users/login", {
+        fetch("http://10.42.0.216:5000/api/users/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -56,13 +66,17 @@ class Login extends Component {
             .then((response) => {
                 console.log(response);
                 if (response.success==true) 
-                {    proceed = true;
+                {   
+                    proceed = true;
                     console.log("SUCCESS");
+                    global.photoLink = response.photo;
+                    global.name = response.name;
                 } 
                 else this.setState({ message: response.message });
             })
             .then(() => {
                 this.setState({ isLoggingIn: false })
+                
                 if(proceed) this.goToSecured();
             })
             .catch(err => {
@@ -87,18 +101,29 @@ class Login extends Component {
     }
     goToSecured = () => {
         console.log(this.props);
-        this.props.navigation.navigate('Movies');
+        this.props.navigation.navigate('Welcome');
     }
 
     render() {
+
+        const logo = global.logo;
         
         return (
 
 
 
-            <ScrollView style={{padding: 20}}>
+            <View style={{padding: 20,alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{margin:17}} />
+                {logo && (
+                <Image
+                    source={{ uri: logo }}
+                    style={{ width: 150, height: 150}}
+                />
+                )}
+                    <View style={{margin:20}} />
+
 				<Text 
-					style={{fontSize: 27}}>
+					style={{fontSize: 27, textAlign: "center"}}>
 					Login
 				</Text>
 
@@ -128,15 +153,25 @@ class Login extends Component {
 				<Button 
 					disabled={this.state.isLoggingIn||!this.state.email||!this.state.password}
 		      		onPress={this._userLogin}
-		      		title="Submit"
+		      		title="Login Now"
 		      	/>
 
                 <Button
-                    title="Register"
+                    color="#20B2AA" 
+                    title="Register Now"
                     onPress={this.onPressRegister}
                   />
 
-	      </ScrollView>
+                <View style={{margin:7}} />
+                <Text 
+                    style={{fontSize: 10, textAlign: "right"}}>
+                    Logo Credits: Pizza Hut
+                </Text>
+                <Text 
+                    style={{fontSize: 10, textAlign: "right"}}>
+                    Default Profile Pic Credits: Cyanide and Happiness
+                </Text>
+	      </View>
         )
     }
 }

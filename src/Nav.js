@@ -9,15 +9,15 @@ import {
 import { TabNavigator } from 'react-navigation'
 
 // TabNavigator screens
-import Movies from './Movies'
+import Books from './Books'
 import Upload from './Upload'
 // import TabC from './TabC'
 
 
 
 export const Tabs = TabNavigator({
-    Movies: { screen: Movies },
+    Books: { screen: Books },
     Upload: { screen: Upload },
 }, {
-  order: ['Movies', 'Upload']
+  order: ['Books', 'Upload']
 })

@@ -25,7 +25,7 @@ class Register extends Component {
         email: '',
         password: '',
         password2: false,
-        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIMErF3PUdWe6IUczNaKKUUXTunMcQpRXIyjonSUPYpoJu2fKWJQ&w=65&h=65',
+        photo: 'http://is4.mzstatic.com/image/thumb/Purple71/v4/0b/24/2b/0b242b78-9b31-60df-70ec-46bdd32ccb13/source/512x512bb.jpg',
         message: ''
     }
 
@@ -50,7 +50,7 @@ class Register extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.23.150.20:5000/api/users/register", {
+        fetch("http://10.42.0.216:5000/api/users/register", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -114,13 +114,18 @@ class Register extends Component {
         this.props.navigation.navigate('Login');
     }
     render() {
+
+        const logo = global.logo;
         const photo = this.state.photo;
         console.log(photo);
+
         return (
             <ScrollView style={{padding: 20}}>
+
+
 				<Text 
-					style={{fontSize: 27}}>
-					Login
+					style={{fontSize: 27, textAlign: "center"}}>
+					Register
 				</Text>
 
 				<TextInput
@@ -134,7 +139,6 @@ class Register extends Component {
 					ref={component => this._email = component}
 					placeholder='Email' 
 					onChangeText={(email) => this.setState({email})}
-					autoFocus={true}
 					onFocus={this.clearEmail}
 				/>
 				<TextInput 
@@ -168,11 +172,14 @@ class Register extends Component {
 				)}
 				{this.state.isLoggingIn && <ActivityIndicator />}
 				<View style={{margin:7}} />
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 				<Button 
 					disabled={this.state.isLoggingIn||!this.state.email||!this.state.password}
 		      		onPress={this._userRegister}
-		      		title="Submit"
+		      		title="Register"
 		      	/>
+                </View>
+
 	      </ScrollView>
         )
     }

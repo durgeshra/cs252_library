@@ -6,35 +6,37 @@ import {
   Text,
   Button
 } from 'react-native';
-import { movies } from './data';
-import MoviePoster from './MoviePoster';
-import MoviePopup from './MoviePopup';
+import { books } from './data';
+import BookPoster from './BookPoster';
+import BookPopup from './BookPopup';
 import { StackNavigator } from "react-navigation";
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Confirmation from './Confirmation';
 import Upload from './Upload';
 
-export default class Movies extends Component {
+export default class Books extends Component {
     state = {
         popupIsOpen: false,
         // Day chosen by user
-        chosenDay: 0,       // choose first day by default
-        // Time chosen by user
-        chosenTime: null,
+        chosenDay: 1,       // choose first day by default
+
+        photo: global.photoLink,
+
+        name: global.name,
       }
     
-      openMovie = (movie) => {
+      openBook = (book) => {
         this.setState({
           popupIsOpen: true,
-          movie,	
+          book,	
         });
       }
-      closeMovie = () => {
+      closeBook = () => {
         this.setState({
           popupIsOpen: false,
           // Reset values to default ones
-          chosenDay: 0,
+          chosenDay: 1,
           chosenTime: null,
         });
       }  
@@ -44,19 +46,13 @@ export default class Movies extends Component {
         });
       }
     
-      chooseTime = (time) => {
-        this.setState({
-          chosenTime: time,
-        });
-      }
 
       bookTicket = () => {
-        // Make sure they selected time 
-        if (!this.state.chosenTime) {
-          alert('Please select show time');
+        if (!this.state.chosenDay) {
+          alert('Please select reservation week');
         } else {
           // Close popup
-          this.closeMovie();
+          this.closeBook();
           // Navigate away to Confirmation route
         //   this.props.navigator.push({
         //     name: 'confirmation',
@@ -80,27 +76,13 @@ export default class Movies extends Component {
   render() {
 
 
-
+  	const name = global.name;
     return (
 
 
 
       <View style={styles.container}>
-        			<ScrollView style={{padding: 10}}>
-				<Text 
-					style={{fontSize: 27}}>
-					Welcome
-				</Text>
-				<View style={{margin:0}} />
-				<Button
-		            onPress={this.onLogoutPress}
-		            title="Logout"
-		        />
-        <Button
-		            onPress={this.onUploadPress}
-		            title="View or Upload Image"
-		        />
-		    </ScrollView>
+ 		
         <ScrollView
 
       
@@ -112,20 +94,24 @@ export default class Movies extends Component {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >
-          {movies.map((movie, index) => <MoviePoster
-            movie={movie}
-            onOpen={this.openMovie}
+        
+
+	
+
+
+          {books.map((book, index) => <BookPoster
+            book={book}
+            onOpen={this.openBook}
             key={index}
           />)}
         </ScrollView>
-        <MoviePopup
-            movie={this.state.movie}
+        <BookPopup
+            book={this.state.book}
             isOpen={this.state.popupIsOpen}
-            onClose={this.closeMovie}
+            onClose={this.closeBook}
             chosenDay={this.state.chosenDay}
             chosenTime={this.state.chosenTime}
             onChooseDay={this.chooseDay}
-            onChooseTime={this.chooseTime}
             onBook={this.bookTicket}
         />
       </View>

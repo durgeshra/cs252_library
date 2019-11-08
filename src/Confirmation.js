@@ -28,7 +28,7 @@ export default class Confirmation extends Component {
         <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
-          onPress={() => this.props.navigation.navigate("Movies") }
+          onPress={() => this.props.navigation.navigate("Books") }
         >
           <Text style={styles.button}>Done</Text>
         </TouchableOpacity>
