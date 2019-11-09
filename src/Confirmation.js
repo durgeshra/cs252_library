@@ -4,16 +4,45 @@ import {PropTypes} from 'prop-types';
 import {
   StyleSheet,
   Text,
+  Button,
   TouchableOpacity,
   View
 } from 'react-native';
 import { defaultStyles } from './styles';
+
+import { captureScreen } from "react-native-view-shot";
+import CameraRollExtended from 'react-native-store-photos-album'
 
 export default class Confirmation extends Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
   }
+
+  state = {
+      message: ''
+  }
+
+  takeShot = () => {
+    captureScreen({
+      format: "jpg",
+      quality: 0.8
+    })
+    .then(
+      uri => {
+        CameraRollExtended.saveToCameraRoll({
+          uri: uri,
+          album: 'Name'
+        }, 'photo');
+        this.setState({ message: 'Screenshot Taken Successfully!' });
+      },
+      error => {
+        console.error("Oops, snapshot failed", error);
+        this.setState({ message: 'Oops! Screenshot Not Taken!' });
+      }
+    );
+  }
+
 
   render() {
     const { params } = this.props.navigation.state;
@@ -25,11 +54,24 @@ export default class Confirmation extends Component {
       <View style={styles.container}>
         <Text style={styles.header}>Your confirmation code</Text>
         <Text style={styles.code}>{code}</Text>
+          <View style={{margin:17}} />
+          <Button
+              onPress={this.takeShot}
+              title="Take Screenshot"
+          />        
+          <View style={{margin:7}} />
+        {!!this.state.message && (
+          <Text
+            style={{fontSize: 14, color: 'green', padding: 5}}>
+            {this.state.message}
+          </Text>
+        )}
         <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
           onPress={() => this.props.navigation.navigate("Books") }
         >
+
           <Text style={styles.button}>Done</Text>
         </TouchableOpacity>
       </View>

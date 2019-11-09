@@ -55,7 +55,7 @@ class Login extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://10.42.0.216:5000/api/users/login", {
+        fetch("http://172.17.76.37:5000/api/users/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -112,12 +112,12 @@ class Login extends Component {
 
 
 
-            <View style={{padding: 20,alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{padding: 10,alignItems: 'center', justifyContent: 'center'}}>
             <View style={{margin:17}} />
                 {logo && (
                 <Image
                     source={{ uri: logo }}
-                    style={{ width: 150, height: 150}}
+                    style={{ width: 100, height: 100}}
                 />
                 )}
                     <View style={{margin:20}} />
@@ -155,7 +155,7 @@ class Login extends Component {
 		      		onPress={this._userLogin}
 		      		title="Login Now"
 		      	/>
-
+                <View style={{margin:7}} />
                 <Button
                     color="#20B2AA" 
                     title="Register Now"

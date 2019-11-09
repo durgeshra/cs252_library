@@ -50,7 +50,7 @@ class Register extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://10.42.0.216:5000/api/users/register", {
+        fetch("http://172.17.76.37:5000/api/users/register", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -159,7 +159,7 @@ class Register extends Component {
                     {photo && (
                     <Image
                         source={{ uri: photo }}
-                        style={{ width: 150, height: 150 }}
+                        style={{ width: 100, height: 100 }}
                     />
                     )}
                     <Button title="Choose Photo" onPress={this.handleChoosePhoto} />

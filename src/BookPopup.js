@@ -275,7 +275,7 @@ export default class BookPopup extends Component {
               style={styles.buttonContainer}
               onPress={onBook}
             >
-              <Text style={styles.button}>Reserve My Book!</Text>
+              <Text style={styles.button}>Rent This Book!</Text>
             </TouchableHighlight>
           </View>
 

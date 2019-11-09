@@ -33,6 +33,8 @@ class Welcome extends Component {
 		const photo = global.photoLink;
 		const name = global.name;
 		const logo = global.logo;
+		// console.log(name);
+		// console.log(">>>>>>>>>>>>>>");
 
 		return (
 				
@@ -41,26 +43,32 @@ class Welcome extends Component {
                     {logo && (
                     <Image
                         source={{ uri: logo }}
-                        style={{ width: 150, height: 150 }}
+                        style={{ width: 120, height: 120 }}
                     />
                     )}
-                    <View style={{margin:17}} />
+                    <View style={{margin:7}} />
                 	<Text 
 						style={{fontSize: 27}}>
 
 						Welcome {name}!
 					</Text>
+
+                    <View style={{margin:7}} />
+
                     {photo && (
                     <Image
                         source={{ uri: photo }}
                         style={{ width: 150, height: 150 }}
                     />
                     )}
+
+                    <View style={{margin:7}} />
+
                     <Button
 			            onPress={this.goToBooks}
 			            title="Go To Library Now"
 		        	/>
-
+					<View style={{margin:7}} />					
                     <Button
                      	color="#ff0000"
 			            onPress={this.goToLogout}

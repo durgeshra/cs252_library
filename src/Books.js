@@ -19,7 +19,7 @@ export default class Books extends Component {
     state = {
         popupIsOpen: false,
         // Day chosen by user
-        chosenDay: 1,       // choose first day by default
+        chosenDay: 0,       // choose first day by default
 
         photo: global.photoLink,
 
@@ -36,7 +36,7 @@ export default class Books extends Component {
         this.setState({
           popupIsOpen: false,
           // Reset values to default ones
-          chosenDay: 1,
+          chosenDay: 0,
           chosenTime: null,
         });
       }  
@@ -48,9 +48,7 @@ export default class Books extends Component {
     
 
       bookTicket = () => {
-        if (!this.state.chosenDay) {
-          alert('Please select reservation week');
-        } else {
+
           // Close popup
           this.closeBook();
           // Navigate away to Confirmation route
@@ -64,7 +62,7 @@ export default class Books extends Component {
             code: Math.random().toString(36).substring(6).toUpperCase(),
           });
         //   <Confirmation code={Math.random().toString(36).substring(6).toUpperCase()} />;
-        }
+        
       }
       onLogoutPress = () => {
         this.props.navigation.navigate('Login');
