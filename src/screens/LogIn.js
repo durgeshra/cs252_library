@@ -35,6 +35,7 @@ class Login extends Component {
         global.photoLink = '';
         global.name = '';
         global.logo = 'https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_tfop89pt/def_height/200/def_width/200/version/100012/type/1';
+
     }
 
     _userLogin = () => {
@@ -55,7 +56,7 @@ class Login extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.17.76.37:5000/api/users/login", {
+        fetch("http://192.168.137.91:5000/api/users/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -105,7 +106,7 @@ class Login extends Component {
     }
 
     render() {
-
+    	console.disableYellowBox = true;
         const logo = global.logo;
         
         return (

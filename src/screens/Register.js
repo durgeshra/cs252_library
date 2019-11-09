@@ -50,7 +50,7 @@ class Register extends Component {
         formBody = formBody.join("&");
 
         var proceed = false;
-        fetch("http://172.17.76.37:5000/api/users/register", {
+        fetch("http://192.168.137.91:5000/api/users/register", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -115,6 +115,7 @@ class Register extends Component {
     }
     render() {
 
+    	console.disableYellowBox = true;
         const logo = global.logo;
         const photo = this.state.photo;
         console.log(photo);

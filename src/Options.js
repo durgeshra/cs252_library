@@ -23,6 +23,7 @@ export default class Options extends Component {
   }
 
   render() {
+    console.disableYellowBox = true;
     const { values, chosen, onChoose } = this.props;
     return (
       <View style={styles.container}>

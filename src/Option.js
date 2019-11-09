@@ -60,6 +60,7 @@ export default class Options extends Component {
   }
 
   render() {
+    console.disableYellowBox = true;
     const { value, isChosen, onChoose } = this.props;
     const backgroundColorAnimation = this.state.background.interpolate({
       inputRange: [0, 100],

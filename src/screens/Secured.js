@@ -45,6 +45,7 @@ class Secured extends Component {
     //     // )
 	// }
 	render() {
+		console.disableYellowBox = true;
 		return (
 			<Books />
 

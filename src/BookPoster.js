@@ -24,6 +24,7 @@ export default class BookPoster extends Component {
     onOpen: PropTypes.func.isRequired,
   }
   render() {
+    console.disableYellowBox = true;
     const { book, book: { title, genre, poster }, onOpen } = this.props;
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(book)}>

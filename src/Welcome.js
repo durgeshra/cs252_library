@@ -29,7 +29,7 @@ class Welcome extends Component {
 
 
 	render() {
-
+        console.disableYellowBox = true;
 		const photo = global.photoLink;
 		const name = global.name;
 		const logo = global.logo;
@@ -38,6 +38,7 @@ class Welcome extends Component {
 
 		return (
 				
+               
 
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     {logo && (

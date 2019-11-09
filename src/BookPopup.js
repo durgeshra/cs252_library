@@ -10,10 +10,12 @@ import {
   Text,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  View
+  View,
+  Alert
 } from 'react-native';
 import { defaultStyles } from './styles';
 import Options from './Options';
+import Books from './Books';
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -22,8 +24,9 @@ const defaultHeight = height * 0.67;
 
 export default class BookPopup extends Component {
 
+
   static propTypes = {
-	isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
     // Book object that has title, genre, poster, days
     book: PropTypes.object,
     // Index of chosen day
@@ -48,7 +51,6 @@ export default class BookPopup extends Component {
     // Visibility flag
     visible: this.props.isOpen,
   };
-
   // When user starts pulling popup previous height gets stored here
   // to help us calculate new height value during and after pulling
   _previousHeight = 0
@@ -207,7 +209,23 @@ export default class BookPopup extends Component {
     };
   }
 
+   areYouSure = () => 
+        Alert.alert(
+        'Confirmation',
+        'Rent this book?',
+        [
+          {
+            text: 'No',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Yes', onPress: this.props.onBook},
+        ],
+        {cancelable: false},
+      );
+
   render() {
+    console.disableYellowBox = true;
     const {
       book,
       chosenDay,
@@ -273,7 +291,7 @@ export default class BookPopup extends Component {
             <TouchableHighlight
               underlayColor="#9575CD"
               style={styles.buttonContainer}
-              onPress={onBook}
+              onPress={this.areYouSure}
             >
               <Text style={styles.button}>Rent This Book!</Text>
             </TouchableHighlight>

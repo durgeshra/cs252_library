@@ -24,23 +24,30 @@ export default class Books extends Component {
         photo: global.photoLink,
 
         name: global.name,
+
+        bookRent: '',
+
       }
     
       openBook = (book) => {
         this.setState({
           popupIsOpen: true,
+          bookRent: book,
           book,	
         });
       }
       closeBook = () => {
+
         this.setState({
           popupIsOpen: false,
           // Reset values to default ones
+          bookRent: '',
           chosenDay: 0,
           chosenTime: null,
         });
       }  
       chooseDay = (day) => {
+        console.log("ASDFG");
         this.setState({
           chosenDay: day,
         });
@@ -48,7 +55,8 @@ export default class Books extends Component {
     
 
       bookTicket = () => {
-
+        const chosenWeek = (this.state.chosenDay+1).toString();
+        // console.log(this.state.chosenDay.toString());
           // Close popup
           this.closeBook();
           // Navigate away to Confirmation route
@@ -60,6 +68,8 @@ export default class Books extends Component {
       this.props.navigation.navigate('Confirmation', {
             // Generate random string
             code: Math.random().toString(36).substring(6).toUpperCase(),
+            bookRent: this.state.book.title,
+            week: chosenWeek,
           });
         //   <Confirmation code={Math.random().toString(36).substring(6).toUpperCase()} />;
         
@@ -72,7 +82,7 @@ export default class Books extends Component {
       this.props.navigation.navigate('Upload');
   }
   render() {
-
+    console.disableYellowBox = true;
 
   	const name = global.name;
     return (

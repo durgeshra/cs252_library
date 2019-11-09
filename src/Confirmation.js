@@ -17,10 +17,15 @@ export default class Confirmation extends Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
+    bookRent: PropTypes.string.isRequired,
+    week: PropTypes.string.isRequired,
   }
 
   state = {
-      message: ''
+      message: '',
+      name: '',
+      book: '',
+      date: ''
   }
 
   takeShot = () => {
@@ -45,15 +50,27 @@ export default class Confirmation extends Component {
 
 
   render() {
+    const book = global.book;
+    console.disableYellowBox = true;
     const { params } = this.props.navigation.state;
     console.log(params);
     console.log("###############");
     const code = params ? params.code : null;
+    const bookRent = params ? params.bookRent : "null";
+    const week = params ? params.week : "null";
     console.log(params);
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Your confirmation code</Text>
+
         <Text style={styles.code}>{code}</Text>
+          <View style={{margin:7}} />
+
+          <Text style={{  alignItems: 'center', justifyContent: 'center' }}>Name: {global.name}</Text>
+          <Text style={{ alignItems: 'center', justifyContent: 'center' }}>Book: {bookRent}</Text>
+          <Text style={{alignItems: 'center', justifyContent: 'center' }}>Week: {week}</Text>
+
+
           <View style={{margin:17}} />
           <Button
               onPress={this.takeShot}
