@@ -2,6 +2,7 @@
 
 ## Technologies Used:
 Server side - Express.js, MongoDB with Node.js
+
 Client Side - React-native
 
 ## Features:
